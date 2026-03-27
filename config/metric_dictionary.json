@@ -1,0 +1,57 @@
+{
+  "total_paid_amount": {
+    "description": "Total amount paid by the health plan for paid claims",
+    "formula": "SUM(paid_amount)",
+    "grain": "claim_line",
+    "filters": {
+      "claim_status": "Paid",
+      "is_reversed": false
+    },
+    "dimensions": ["provider_specialty", "claim_type", "member_state", "service_date"]
+  },
+  "total_drug_spend": {
+    "description": "Total paid amount for drug-related claims",
+    "formula": "SUM(paid_amount)",
+    "grain": "claim_line",
+    "filters": {
+      "claim_status": "Paid",
+      "is_reversed": false,
+      "drug_code": "NOT NULL"
+    },
+    "dimensions": ["drug_code", "provider_specialty", "place_of_service"]
+  },
+  "denied_claims_count": {
+    "description": "Total number of denied claims",
+    "formula": "COUNT(DISTINCT claim_id)",
+    "grain": "claim",
+    "filters": {
+      "claim_status": "Denied"
+    },
+    "dimensions": ["provider_specialty", "claim_type"]
+  },
+  "pending_claims_count": {
+    "description": "Total number of pending claims",
+    "formula": "COUNT(DISTINCT claim_id)",
+    "grain": "claim",
+    "filters": {
+      "claim_status": "Pending"
+    },
+    "dimensions": ["provider_type"]
+  },
+  "claim_approval_rate": {
+    "description": "Percentage of claims approved (paid vs total)",
+    "formula": "SUM(CASE WHEN claim_status = 'Paid' THEN 1 ELSE 0 END) / COUNT(DISTINCT claim_id)",
+    "grain": "claim",
+    "filters": {},
+    "dimensions": ["provider_specialty", "claim_type"]
+  },
+   "reversal_rate": {
+    "description": "Percentage of claims reversed after payment",
+    "formula": "SUM(CASE WHEN is_reversed = TRUE THEN 1 ELSE 0 END) / COUNT(DISTINCT claim_id)",
+    "grain": "claim",
+    "filters": {
+      "claim_status": "Paid"
+    },
+    "dimensions": ["provider_specialty"]
+  }
+}

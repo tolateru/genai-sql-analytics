@@ -1,0 +1,31 @@
+{
+  "table_name": "healthcare_claims",
+  "columns": [
+    "member_id",
+    "provider_id",
+    "claim_id",
+    "claim_line_number",
+    "service_date",
+    "paid_date",
+    "claim_received_date",
+    "member_age",
+    "gender",
+    "member_state",
+    "provider_specialty",
+    "provider_type",
+    "claim_type",
+    "place_of_service",
+    "diagnosis_code",
+    "procedure_code",
+    "billed_amount",
+    "allowed_amount",
+    "paid_amount",
+    "member_responsibility",
+    "drug_code",
+    "units_administered",
+    "claim_status",
+    "is_reversed",
+    "is_denied",
+    "is_pending"
+  ]
+}
