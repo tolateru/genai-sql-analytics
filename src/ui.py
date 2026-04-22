@@ -34,7 +34,7 @@ metrics = [
     "Reversal Rate",
     "Average Cost Per Claim"
 ]
-for mmetric in metrics:
+for metric in metrics:
     st.sidebar.write(f"- {metric}")
 
 # Dimensions
@@ -51,13 +51,13 @@ dimensions = [
     "Provider Contract Type",
     "Provider Group"
 ]
-for d in dimensions:
+for dimension in dimensions:
     st.sidebar.write(f"- {dimension}")
 
 # Tables
 st.sidebar.header("Available Tables")
 tables = ["healthcare_claims", "provider_reference"]
-for t in tables:
+for table in tables:
     st.sidebar.write(f"- {table}")
 
 # Sample Questions
@@ -69,7 +69,8 @@ examples = [
     "Show drug spend by provider contract type",
     "Show average paid amount by claim type"
 ]
-for e in examples:
+
+for example in examples:
     if st.sidebar.button(example):
         st.session_state["question"] = example
 
