@@ -9,7 +9,9 @@ from query_runner import run_sql_on_csv
 load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-csv_path = os.path.join(BASE_DIR, "data", "healthcare_claims_100k.csv")
+
+claims_csv_path = os.path.join(BASE_DIR, "data", "healthcare_claims_100k.csv")
+provider_csv_path = os.path.join(BASE_DIR, "data", "provider_reference.csv")
 
 with open(os.path.join(BASE_DIR, "config", "metric_dictionary.json"), "r") as f:
     metric_dict = json.load(f)
@@ -31,7 +33,7 @@ if st.button("Generate SQL") and question:
         st.code(sql, language="sql")
 
         st.subheader("Query Results")
-        results_df = run_sql_on_csv(sql, csv_path)
+        results_df = run_sql_on_csv(sql, claims_csv_path, provider_csv_path)
         st.dataframe(results_df, use_container_width=True)
 
         st.caption(f"Returned {len(results_df)} rows")
