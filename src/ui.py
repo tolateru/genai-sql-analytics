@@ -24,7 +24,6 @@ st.set_page_config(page_title="Healthcare GenAI SQL Assistant", layout="wide")
 # Sidebar - Semantic Layer
 st.sidebar.title("Analytics Guide")
 
-# Metrics
 st.sidebar.header("Available Metrics")
 metrics = [
     "Total Paid Amount",
@@ -37,7 +36,6 @@ metrics = [
 for metric in metrics:
     st.sidebar.write(f"- {metric}")
 
-# Dimensions
 st.sidebar.header("Available Dimensions")
 dimensions = [
     "Provider Specialty",
@@ -54,13 +52,11 @@ dimensions = [
 for dimension in dimensions:
     st.sidebar.write(f"- {dimension}")
 
-# Tables
 st.sidebar.header("Available Tables")
 tables = ["healthcare_claims", "provider_reference"]
 for table in tables:
     st.sidebar.write(f"- {table}")
 
-# Sample Questions
 st.sidebar.header("Sample Questions")
 examples = [
     "Show total paid amount by provider region",
