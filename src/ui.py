@@ -34,7 +34,7 @@ metrics = [
     "Reversal Rate",
     "Average Cost Per Claim"
 ]
-for m in metrics:
+for mmetric in metrics:
     st.sidebar.write(f"- {metric}")
 
 # Dimensions
