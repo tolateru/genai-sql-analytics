@@ -20,9 +20,65 @@ with open(os.path.join(BASE_DIR, "config", "schema.json"), "r") as f:
     schema = json.load(f)
 
 st.set_page_config(page_title="Healthcare GenAI SQL Assistant", layout="wide")
+
+# Sidebar - Semantic Layer
+st.sidebar.title("Analytics Guide")
+
+# Metrics
+st.sidebar.header("Available Metrics")
+metrics = [
+    "Total Paid Amount",
+    "Total Drug Spend",
+    "Denied Claims Count",
+    "Pending Claims Count",
+    "Reversal Rate",
+    "Average Cost Per Claim"
+]
+for m in metrics:
+    st.sidebar.write(f"- {metric}")
+
+# Dimensions
+st.sidebar.header("Available Dimensions")
+dimensions = [
+    "Provider Specialty",
+    "Claim Type",
+    "Member State",
+    "Place of Service",
+    "Service Date",
+    "Drug Code",
+    "Provider Region",
+    "Provider Network Status",
+    "Provider Contract Type",
+    "Provider Group"
+]
+for d in dimensions:
+    st.sidebar.write(f"- {dimension}")
+
+# Tables
+st.sidebar.header("Available Tables")
+tables = ["healthcare_claims", "provider_reference"]
+for t in tables:
+    st.sidebar.write(f"- {table}")
+
+# Sample Questions
+st.sidebar.header("Sample Questions")
+examples = [
+    "Show total paid amount by provider region",
+    "Compare denied claims by provider network status",
+    "Show reversal rate by provider group",
+    "Show drug spend by provider contract type",
+    "Show average paid amount by claim type"
+]
+for e in examples:
+    if st.sidebar.button(example):
+        st.session_state["question"] = example
+
 st.title("Healthcare GenAI SQL Assistant")
 
-question = st.text_input("Ask a healthcare analytics question:")
+question = st.text_input(
+    "Ask a healthcare analytics question:",
+    value=st.session_state.get("question", "")
+)
 
 if st.button("Generate SQL") and question:
     try:
