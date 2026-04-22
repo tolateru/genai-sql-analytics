@@ -1,31 +1,58 @@
 {
-  "table_name": "healthcare_claims",
-  "columns": [
-    "member_id",
-    "provider_id",
-    "claim_id",
-    "claim_line_number",
-    "service_date",
-    "paid_date",
-    "claim_received_date",
-    "member_age",
-    "gender",
-    "member_state",
-    "provider_specialty",
-    "provider_type",
-    "claim_type",
-    "place_of_service",
-    "diagnosis_code",
-    "procedure_code",
-    "billed_amount",
-    "allowed_amount",
-    "paid_amount",
-    "member_responsibility",
-    "drug_code",
-    "units_administered",
-    "claim_status",
-    "is_reversed",
-    "is_denied",
-    "is_pending"
+  "tables": {
+    "healthcare_claims": {
+      "description": "Claims fact table containing claim, member, financial, drug, and adjudication data",
+      "columns": [
+        "member_id",
+        "provider_id",
+        "claim_id",
+        "claim_line_number",
+        "service_date",
+        "paid_date",
+        "claim_received_date",
+        "member_age",
+        "gender",
+        "member_state",
+        "provider_specialty",
+        "provider_type",
+        "claim_type",
+        "place_of_service",
+        "diagnosis_code",
+        "procedure_code",
+        "billed_amount",
+        "allowed_amount",
+        "paid_amount",
+        "member_responsibility",
+        "drug_code",
+        "units_administered",
+        "claim_status",
+        "is_reversed",
+        "is_denied",
+        "is_pending"
+      ]
+    },
+    "provider_reference": {
+      "description": "Provider dimension table containing provider profile and contract attributes",
+      "columns": [
+        "provider_id",
+        "provider_name",
+        "provider_region",
+        "provider_network_status",
+        "provider_contract_type",
+        "provider_risk_tier",
+        "provider_group",
+        "provider_start_date"
+      ]
+    }
+  },
+  "joins": [
+    {
+      "left_table": "healthcare_claims",
+      "left_column": "provider_id",
+      "right_table": "provider_reference",
+      "right_column": "provider_id",
+      "join_type": "INNER",
+      "description": "Join claims to provider dimension using provider_id"
+    }
   ]
 }
